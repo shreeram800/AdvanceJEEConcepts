@@ -1,9 +1,9 @@
 package org.example;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,13 +35,15 @@ public class TimeTest {
             preparedStatement.setString(1, name);
 
             preparedStatement.setDate(2,sqlDate);
-            preparedStatement.executeUpdate();
+            System.out.println("No of lines affected: "+ preparedStatement.executeUpdate());
             preparedStatement.close();
             connection.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
             sc.close();
         }
 
